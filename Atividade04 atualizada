@@ -1,0 +1,152 @@
+atividade1
+num = float(input("Digite um número: "))
+if num < 0:
+    print("Você digitou um número negativo.")
+else:
+    print("Você digitou um número positivo.")
+
+ Atividade2 
+num = float(input("\nDigite um número: "))
+if num < 0:
+    print("Você digitou um número negativo.")
+elif num > 0:
+    print("Você digitou um número positivo.")
+else:
+    print("Você digitou zero.")
+
+Atividade3 
+n1 = float(input("\nDigite a primeira nota: "))
+n2 = float(input("Digite a segunda nota: "))
+n3 = float(input("Digite a terceira nota: "))
+media = (n1 + n2 + n3) / 3
+if media >= 7:
+    print("ALUNO APROVADO")
+else:
+    print("ALUNO REPROVADO")
+
+Atividade4
+n1 = float(input("\nDigite a primeira nota: "))
+n2 = float(input("Digite a segunda nota: "))
+n3 = float(input("Digite a terceira nota: "))
+media = (n1 + n2 + n3) / 3
+if media >= 7:
+    print("ALUNO APROVADO")
+elif media >= 5:
+    print("ALUNO EM RECUPERAÇÃO")
+else:
+    print("ALUNO REPROVADO")
+
+ Atividade5
+num = int(input("\nDigite um número: "))
+if num % 2 == 0:
+    print("O número é PAR.")
+else:
+    print("O número é ÍMPAR.")
+
+Atividade6 
+a = int(input("\nDigite o primeiro número: "))
+b = int(input("Digite o segundo número: "))
+c = int(input("Digite o terceiro número: "))
+maior = a
+if b > maior:
+    maior = b
+if c > maior:
+    maior = c
+print("O maior número é:", maior)
+
+Atividade7
+idade = int(input("\nDigite a idade do nadador: "))
+if idade >= 18:
+    print("Categoria: Adulto")
+elif idade >= 14:
+    print("Categoria: Juvenil")
+elif idade >= 9:
+    print("Categoria: Infantil")
+else:
+    print("Categoria: Mirim")
+
+Atividade 08
+a = int(input("\nDigite o primeiro número: "))
+b = int(input("Digite o segundo número: "))
+soma = a + b
+if soma > 20:
+    print("Resultado:", soma + 8)
+else:
+    print("Resultado:", soma - 5)
+
+Atividade9
+valor_compra = float(input("\nDigite o valor do produto: "))
+if valor_compra < 20:
+    venda = valor_compra * 1.45
+else:
+    venda = valor_compra * 1.30
+print("Valor de venda: R$", venda)
+
+Atividade10
+qtd = int(input("\nDigite a quantidade de maçãs: "))
+if qtd < 12:
+    preco = qtd * 0.30
+else:
+    preco = qtd * 0.25
+print("Valor total da compra: R$", preco)
+
+Atividade11
+altura = float(input("\nDigite a altura (m): "))
+sexo = int(input("Digite o sexo (1: feminino, 2: masculino): "))
+if sexo == 2:
+    peso_ideal = (72.7 * altura) - 58
+elif sexo == 1:
+    peso_ideal = (62.1 * altura) - 44.7
+else:
+    peso_ideal = None
+if peso_ideal:
+    print("O peso ideal é:", peso_ideal, "kg")
+else:
+    print("Sexo inválido.")
+
+Atividade12
+dia = int(input("\nDigite um número de 1 a 7 (1=Domingo, 7=Sábado): "))
+if dia == 1 or dia == 7:
+    print("Final de semana")
+elif 2 <= dia <= 6:
+    print("Dia útil")
+else:
+    print("Dia inválido")
+
+Atividade13
+print("\nCódigos disponíveis: 1=Arroz(R$5.00), 2=Feijão(R$7.00), 3=Macarrão(R$4.00)")
+codigo = int(input("Digite o código do produto: "))
+if codigo == 1:
+    preco = 5.00
+elif codigo == 2:
+    preco = 7.00
+elif codigo == 3:
+    preco = 4.00
+else:
+    preco = 0
+    print("Código inválido!")
+if preco > 0:
+    print("Valor do produto:", preco)
+
+ Atividade14
+print("\nEscolha a operação: ")
+print("1 - Soma")
+print("2 - Subtração")
+print("3 - Multiplicação")
+print("4 - Divisão")
+op = int(input("Digite a operação: "))
+a = float(input("Digite o primeiro número: "))
+b = float(input("Digite o segundo número: "))
+if op == 1:
+    print("Resultado:", a + b)
+elif op == 2:
+    print("Resultado:", a - b)
+elif op == 3:
+    print("Resultado:", a * b)
+elif op == 4:
+    if b != 0:
+        print("Resultado:", a / b)
+    else:
+        print("Erro: divisão por zero!")
+else:
+    print("Operação inválida.")
