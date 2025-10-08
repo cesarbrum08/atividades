@@ -1,0 +1,166 @@
+package cesar;
+
+import java.util.Scanner;
+
+public class Atividade07 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+         1
+        int[][] matriz = new int[4][4];
+        System.out.println("=== 1 ===");
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                System.out.print("Digite o valor para posição [" + i + "][" + j + "]: ");
+                matriz[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println("Matriz digitada:");
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                System.out.print(matriz[i][j] + "\t");
+            }
+            System.out.println();
+        }
+
+         2
+        int[] vetor = new int[8];
+        System.out.println("\n=== 2 ===");
+        for (int i = 0; i < 8; i++) {
+            System.out.print("Número " + (i + 1) + ": ");
+            vetor[i] = sc.nextInt();
+        }
+        int maior = vetor[0];
+        int posMaior = 0;
+        for (int i = 1; i < 8; i++) {
+            if (vetor[i] > maior) {
+                maior = vetor[i];
+                posMaior = i;
+            }
+        }
+        System.out.println("Maior valor: " + maior + " na posição: " + posMaior);
+
+         3
+        int[] vet1 = new int[5];
+        int[] vet2 = new int[5];
+        System.out.println("\n=== 3 ===");
+        for (int i = 0; i < 5; i++) {
+            System.out.print("Valor " + (i + 1) + ": ");
+            vet1[i] = sc.nextInt();
+            vet2[i] = vet1[i];
+        }
+        System.out.print("vet1: ");
+        for (int i = 0; i < 5; i++) System.out.print(vet1[i] + " ");
+        System.out.println();
+        System.out.print("vet2: ");
+        for (int i = 0; i < 5; i++) System.out.print(vet2[i] + " ");
+        System.out.println();
+
+         4
+        double[] numeros = new double[20];
+        System.out.println("\n=== 4 ===");
+        double soma = 0;
+        for (int i = 0; i < 20; i++) {
+            System.out.print("Número " + (i + 1) + ": ");
+            numeros[i] = sc.nextDouble();
+            soma += numeros[i];
+        }
+        double media = soma / 20;
+        System.out.println("Média = " + media);
+        System.out.println("Valores abaixo da média:");
+        for (int i = 0; i < 20; i++) {
+            if (numeros[i] < media) {
+                System.out.print(numeros[i] + " ");
+            }
+        }
+        System.out.println();
+
+         5
+        sc.nextLine();
+        String senha;
+        boolean temDigito;
+        do {
+            System.out.print("\n=== 5 ===\nDigite uma senha: ");
+            senha = sc.nextLine();
+            temDigito = false;
+            for (int i = 0; i < senha.length(); i++) {
+                if (senha.charAt(i) >= '0' && senha.charAt(i) <= '9') {
+                    temDigito = true;
+                    break;
+                }
+            }
+            if (senha.length() < 8 && !temDigito) {
+                System.out.println("Senha inválida: mínimo 8 caracteres e falta dígito.");
+            } else if (senha.length() < 8) {
+                System.out.println("Senha inválida: mínimo 8 caracteres.");
+            } else if (!temDigito) {
+                System.out.println("Senha inválida: falta dígito.");
+            } else {
+                System.out.println("Senha válida!");
+                break;
+            }
+        } while (true);
+
+         6
+        System.out.print("\n=== 6 ===\nDigite uma frase: ");
+        String frase = sc.nextLine();
+        int vogais = 0, consoantes = 0, espacos = 0, outros = 0;
+        frase = frase.toLowerCase();
+        for (int i = 0; i < frase.length(); i++) {
+            char c = frase.charAt(i);
+            if ("aeiou".indexOf(c) >= 0) {
+                vogais++;
+            } else if (c >= 'a' && c <= 'z') {
+                consoantes++;
+            } else if (c == ' ') {
+                espacos++;
+            } else {
+                outros++;
+            }
+        }
+        System.out.println("Vogais: " + vogais);
+        System.out.println("Consoantes: " + consoantes);
+        System.out.println("Espaços: " + espacos);
+        System.out.println("Outros: " + outros);
+
+         7
+        System.out.print("\n=== 7 ===\nDigite um texto: ");
+        String texto = sc.nextLine();
+        System.out.print("Digite uma palavra para buscar: ");
+        String palavra = sc.nextLine();
+        int inicio = 0, pos, cont = 0;
+        while ((pos = texto.indexOf(palavra, inicio)) != -1) {
+            cont++;
+            inicio = pos + 1;
+        }
+        if (cont > 0) {
+            System.out.println("A palavra \"" + palavra + "\" aparece " + cont + " vezes.");
+        } else {
+            System.out.println("A palavra \"" + palavra + "\" não foi encontrada.");
+        }
+
+         8
+        System.out.print("\n=== 8 ===\nCadastre um nome de usuário: ");
+        String usuarioCadastrado = sc.nextLine();
+        int tentativas = 3;
+        String usuarioDigitado;
+        do {
+            System.out.print("Digite o nome de usuário: ");
+            usuarioDigitado = sc.nextLine();
+            if (usuarioDigitado.equalsIgnoreCase(usuarioCadastrado)) {
+                System.out.println("Acesso concedido!");
+                break;
+            } else {
+                tentativas--;
+                if (tentativas > 0) {
+                    System.out.println("Acesso negado – tentativas restantes: " + tentativas);
+                } else {
+                    System.out.println("Conta bloqueada.");
+                }
+            }
+        } while (tentativas > 0 && !usuarioDigitado.equalsIgnoreCase(usuarioCadastrado));
+
+        sc.close();
+    }
+}

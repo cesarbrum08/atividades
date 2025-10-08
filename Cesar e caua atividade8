@@ -1,0 +1,339 @@
+package cesar;
+
+import java.util.Scanner;
+
+public class Atividade08 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+         1
+        System.out.println("=== 1 ===");
+        System.out.print("Digite A: ");
+        double a = sc.nextDouble();
+        System.out.print("Digite B: ");
+        double b = sc.nextDouble();
+        System.out.print("Digite C: ");
+        double c = sc.nextDouble();
+        double delta = calcularDelta(a, b, c);
+        if (delta < 0) {
+            System.out.println("Sem raízes reais.");
+        } else {
+            double x1 = (-b + Math.sqrt(delta)) / (2 * a);
+            double x2 = (-b - Math.sqrt(delta)) / (2 * a);
+            System.out.println("Dada a equação: " + a + "x² + " + b + "x + " + c + " = 0");
+            System.out.println("x1 = " + x1 + " | x2 = " + x2);
+        }
+
+         2
+        System.out.println("\n=== 2 ===");
+        System.out.println("Menu===\n1. Soma\n2. Subtração\n3. Multiplicação\n4. Divisão");
+        System.out.print("Escolha: ");
+        int opcao = sc.nextInt();
+        System.out.print("Digite o primeiro número: ");
+        int n1 = sc.nextInt();
+        System.out.print("Digite o segundo número: ");
+        int n2 = sc.nextInt();
+        double resultado = 0;
+        switch (opcao) {
+            case 1 -> resultado = soma(n1, n2);
+            case 2 -> resultado = subtracao(n1, n2);
+            case 3 -> resultado = multiplicacao(n1, n2);
+            case 4 -> resultado = divisao(n1, n2);
+            default -> System.out.println("Opção inválida");
+        }
+        System.out.println("Resultado: " + resultado);
+
+         3
+        System.out.println("\n=== 3 ===");
+        System.out.print("Digite o número do mês (1-12): ");
+        int mes = sc.nextInt();
+        System.out.println("a) " + nomeMesSwitch(mes));
+        System.out.println("b) " + nomeMesVetor(mes));
+
+         4
+        System.out.println("\n=== 4 ===");
+        System.out.print("Quantos funcionários há na empresa? ");
+        int qtd = sc.nextInt();
+        double[] salarios = new double[qtd];
+        double soma = 0;
+        for (int i = 0; i < qtd; i++) {
+            System.out.print("Salário " + (i + 1) + ": ");
+            salarios[i] = sc.nextDouble();
+            soma += salarios[i];
+        }
+        double media = soma / qtd;
+        int acima = 0;
+        for (double s : salarios) if (s > media) acima++;
+        System.out.println("Salário médio: " + media);
+        System.out.println("Funcionários acima da média: " + acima);
+
+         5
+        System.out.println("\n=== 5 ===");
+        double[] pesos = new double[10];
+        for (int i = 0; i < 10; i++) {
+            System.out.print("Peso " + (i + 1) + ": ");
+            pesos[i] = sc.nextDouble();
+        }
+        double menor = pesos[0];
+        int pos = 0;
+        for (int i = 1; i < 10; i++) {
+            if (pesos[i] < menor) {
+                menor = pesos[i];
+                pos = i;
+            }
+        }
+        System.out.println("Menor peso: " + menor + " (posição " + pos + ")");
+
+         6
+        System.out.println("\n=== 6 ===");
+        System.out.print("Digite N: ");
+        int N = sc.nextInt();
+        int f1 = 0, f2 = 1;
+        System.out.print("Sequência de Fibonacci: ");
+        for (int i = 0; i < N; i++) {
+            System.out.print(f1 + " ");
+            int temp = f1 + f2;
+            f1 = f2;
+            f2 = temp;
+        }
+        System.out.println();
+
+        7
+        System.out.println("\n=== 7 ===");
+        sc.nextLine();
+        String[] nomes = new String[10];
+        for (int i = 0; i < 10; i++) {
+            System.out.print("Nome " + (i + 1) + ": ");
+            nomes[i] = sc.nextLine();
+        }
+        System.out.print("Digite o nome para buscar: ");
+        String busca = sc.nextLine();
+        int indice = buscaNome(nomes, busca);
+        if (indice >= 0) System.out.println("Nome encontrado na posição: " + indice);
+        else System.out.println("Nome não encontrado.");
+
+         8
+        System.out.println("\n=== 8 ===");
+        System.out.println("=== Cadastro Pet Shop Amigo Fiel ===");
+        System.out.print("Digite o nome do pet: ");
+        String nomePet = sc.nextLine();
+        System.out.print("Digite a raça do pet: ");
+        String raca = sc.nextLine();
+        System.out.print("Digite a idade do pet: ");
+        int idade = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Digite o nome do dono: ");
+        String nomeDono = sc.nextLine();
+        System.out.print("Digite o contato do dono: ");
+        String contato = sc.nextLine();
+        Cachorro pet = new Cachorro(nomePet, raca, idade, nomeDono, contato);
+        System.out.println("\nMenu de Serviços ===");
+        System.out.println("1. Banho\n2. Tosa\n3. Banho e Tosa\n4. Consulta Veterinária");
+        System.out.print("Escolha o procedimento desejado: ");
+        int serv = sc.nextInt();
+        String servico = switch (serv) {
+            case 1 -> "Banho";
+            case 2 -> "Tosa";
+            case 3 -> "Banho e Tosa";
+            case 4 -> "Consulta Veterinária";
+            default -> "Desconhecido";
+        };
+        System.out.println("=======================================");
+        System.out.println("FICHA DE ATENDIMENTO - AMIGO FIEL");
+        System.out.println("=======================================");
+        pet.exibir_dados();
+        System.out.println("---------------------------------------");
+        System.out.println("Procedimento...: " + servico);
+        System.out.println("=======================================");
+
+        // 9
+        System.out.println("\n=== 9 ===");
+        sc.nextLine();
+        System.out.print("Nome do aluno: ");
+        String nomeAluno = sc.nextLine();
+        System.out.print("Matrícula: ");
+        String matricula = sc.nextLine();
+        System.out.print("Nota prova 1: ");
+        double p1 = sc.nextDouble();
+        System.out.print("Nota prova 2: ");
+        double p2 = sc.nextDouble();
+        System.out.print("Nota do trabalho: ");
+        double trab = sc.nextDouble();
+        Aluno aluno = new Aluno(matricula, nomeAluno, p1, p2, trab);
+        System.out.println("Média final: " + aluno.media());
+        System.out.println("Precisa na final: " + aluno.finalNecessario());
+
+        // 10
+        System.out.println("\n=== 10 ===");
+        Gabarito g = new Gabarito();
+        Prova pA = new Prova(g);
+        Prova pB = new Prova(g);
+        System.out.println("Responda 15 questões (A-E) para o Aluno A:");
+        for (int i = 0; i < 15; i++) {
+            System.out.print("Questão " + (i + 1) + ": ");
+            pA.respostaAluno(sc.next().charAt(0));
+        }
+        System.out.println("Responda 15 questões (A-E) para o Aluno B:");
+        for (int i = 0; i < 15; i++) {
+            System.out.print("Questão " + (i + 1) + ": ");
+            pB.respostaAluno(sc.next().charAt(0));
+        }
+        System.out.println("Aluno A - Acertos: " + pA.acertos() + " | Nota: " + pA.nota());
+        System.out.println("Aluno B - Acertos: " + pB.acertos() + " | Nota: " + pB.nota());
+        System.out.println("Maior nota: " + pA.maior(pB));
+
+        sc.close();
+    }
+
+    public static double calcularDelta(double a, double b, double c) {
+        return b * b - 4 * a * c;
+    }
+
+    public static double soma(int x, int y) {
+        return x + y;
+    }
+
+    public static double subtracao(int x, int y) {
+        return x - y;
+    }
+
+    public static double multiplicacao(int x, int y) {
+        return x * y;
+    }
+
+    public static double divisao(int x, int y) {
+        return (double) x / y;
+    }
+
+    public static String nomeMesSwitch(int mes) {
+        return switch (mes) {
+            case 1 -> "Janeiro";
+            case 2 -> "Fevereiro";
+            case 3 -> "Março";
+            case 4 -> "Abril";
+            case 5 -> "Maio";
+            case 6 -> "Junho";
+            case 7 -> "Julho";
+            case 8 -> "Agosto";
+            case 9 -> "Setembro";
+            case 10 -> "Outubro";
+            case 11 -> "Novembro";
+            case 12 -> "Dezembro";
+            default -> "Mês inválido";
+        };
+    }
+
+    public static String nomeMesVetor(int mes) {
+        String[] meses = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
+        if (mes >= 1 && mes <= 12) return meses[mes - 1];
+        return "Mês inválido";
+    }
+
+    public static int buscaNome(String[] nomes, String busca) {
+        for (int i = 0; i < nomes.length; i++) {
+            if (nomes[i].equalsIgnoreCase(busca)) return i;
+        }
+        return -1;
+    }
+}
+
+class Cachorro {
+    private String nome_pet;
+    private String raca;
+    private int idade;
+    private String nome_dono;
+    private String contato_dono;
+
+    public Cachorro(String nome_pet, String raca, int idade, String nome_dono, String contato_dono) {
+        this.nome_pet = nome_pet;
+        this.raca = raca;
+        this.idade = idade;
+        this.nome_dono = nome_dono;
+        this.contato_dono = contato_dono;
+    }
+
+    public void exibir_dados() {
+        System.out.println("Nome do Pet....: " + nome_pet);
+        System.out.println("Raça...........: " + raca);
+        System.out.println("Idade..........: " + idade + " anos");
+        System.out.println("Dono(a)........: " + nome_dono);
+        System.out.println("Contato........: " + contato_dono);
+    }
+}
+
+class Aluno {
+    private String matricula;
+    private String nome;
+    private double nota1;
+    private double nota2;
+    private double trabalho;
+
+    public Aluno(String matricula, String nome, double nota1, double nota2, double trabalho) {
+        this.matricula = matricula;
+        this.nome = nome;
+        this.nota1 = nota1;
+        this.nota2 = nota2;
+        this.trabalho = trabalho;
+    }
+
+    public double media() {
+        return ((nota1 * 2.5) + (nota2 * 2.5) + (trabalho * 2)) / 7;
+    }
+
+    public double finalNecessario() {
+        double m = media();
+        if (m >= 7) return 0;
+        return 10 - m;
+    }
+}
+
+class Gabarito {
+    public char respostaQuestao(int numeroQuestao) {
+        char[] respostas = {'A', 'B', 'C', 'D', 'E', 'A', 'B', 'C', 'D', 'E', 'A', 'B', 'C', 'D', 'E'};
+        return respostas[numeroQuestao - 1];
+    }
+}
+
+class Prova {
+    private Gabarito gabarito;
+    private char[] respostasAluno = new char[15];
+    private int atual = 0;
+
+    public Prova(Gabarito gabarito) {
+        this.gabarito = gabarito;
+    }
+
+    public void respostaAluno(char resposta) {
+        if (atual < 15) {
+            respostasAluno[atual] = Character.toUpperCase(resposta);
+            atual++;
+        }
+    }
+
+    public int acertos() {
+        int acertos = 0;
+        for (int i = 0; i < 15; i++) {
+            if (respostasAluno[i] == gabarito.respostaQuestao(i + 1)) acertos++;
+        }
+        return acertos;
+    }
+
+    public double nota() {
+        double nota = 0;
+        for (int i = 0; i < 15; i++) {
+            if (respostasAluno[i] == gabarito.respostaQuestao(i + 1)) {
+                if (i < 10) nota += 0.5;
+                else nota += 1.0;
+            }
+        }
+        return nota;
+    }
+
+    public double maior(Prova outra) {
+        if (this.acertos() > outra.acertos()) return this.nota();
+        if (this.acertos() < outra.acertos()) return outra.nota();
+        if (this.nota() >= outra.nota()) return this.nota();
+        return outra.nota();
+    }
+}
