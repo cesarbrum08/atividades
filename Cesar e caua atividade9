@@ -1,0 +1,210 @@
+[21:17, 07/10/2025] c.: package cesar;
+
+import java.util.Scanner;
+
+public class Atividade07 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+         1
+        int[][] matriz = new int[4][4];
+        System.out.println("=== 1 ===");
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                System.out.print("Digite o valor para posição [" + i + "][" + j + "]: ");
+                matriz[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println("Matriz digitada:");
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                System.out.print(matriz[i][j] + "\t");
+            }
+            System.out.println();
+        }
+
+         2
+        int[] vetor = …
+[21:17, 07/10/2025] c.: questão 7
+[21:20, 07/10/2025] c.: package cesar;
+
+import java.util.Scanner;
+
+public class Atividade08 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+         1
+        System.out.println("=== 1 ===");
+        System.out.print("Digite A: ");
+        double a = sc.nextDouble();
+        System.out.print("Digite B: ");
+        double b = sc.nextDouble();
+        System.out.print("Digite C: ");
+        double c = sc.nextDouble();
+        double delta = calcularDelta(a, b, c);
+        if (delta < 0) {
+            System.out.println("Sem raízes reais.");
+        } else {
+            double x1 = (-b + Math.sqrt(delta)) / (2 * a);
+            double x2 = (-b - Math.sqrt(delta)) / (2 * a);
+            System.out.println("Dada a equação: " + a + "x² + " + …
+[21:21, 07/10/2025] c.: questão 8
+[20:35, 16/10/2025] c.: Atividade 09 - Métodos Setters Getters1.
+Programa de
+Agenda de Contatos
+Implemente uma agenda eletrônica em modo texto. O sistema deve cadastrar, consultar, editar e excluir contatos.
+a.
+Classes mínimas:
+Contato
+(nome, telefone, e-mail).
+AgendaEletronica
+(controle da coleção de contatos e fluxo do programa).
+b. Requisitos funcionais:
+Ao iniciar, exibir um
+menu persistente
+com as opções:
+Cadastrar novo contato (nome, telefone e e-mail).
+Consultar agenda (listar todos; permitir buscar por nome).
+Editar contato (selecionado por critério claro, ex.: nome exato ou índice).
+Excluir contato (com confirmação).
+Sair.
+c. Validações mínimas:
+nome não vazio; telefone apenas com dígitos e/ou formatação padrão; e-mail com formato válido.
+d. Regra de unicidade:
+impedir cad…
+[20:35, 16/10/2025] c.: questão 09
+[20:42, 16/10/2025] c.: class Contato:
+    def _init_(self, nome, telefone, email):
+        self.set_nome(nome)
+        self.set_telefone(telefone)
+        self.set_email(email)
+
+    def get_nome(self):
+        return self.__nome
+
+    def set_nome(self, nome):
+        if not nome.strip():
+            raise ValueError("Nome não pode ser vazio.")
+        self.__nome = nome.strip()
+
+    def get_telefone(self):
+        return self.__telefone
+
+    def set_telefone(self, telefone):
+        if not telefone.isdigit():
+            raise ValueError("Telefone deve conter apenas dígitos.")
+        self.__telefone = telefone
+
+    def get_email(self):
+        if hasattr(self, '__email'):
+            return self.__email
+        return ""
+
+    def set_email(self, email):
+        if "@" not in email or "." not in email:
+            raise ValueError("E-mail inválido.")
+        self.__email = email
+
+    def _str_(self):
+        return f"{self._nome} | {self.telefone} | {self._email}"
+
+
+class AgendaEletronica:
+    def _init_(self):
+        self.__contatos = []
+
+    def menu(self):
+        while True:
+            print("\n=== AGENDA ELETRÔNICA ===")
+            print("1) Cadastrar contato")
+            print("2) Consultar agenda")
+            print("3) Editar contato")
+            print("4) Excluir contato")
+            print("5) Sair")
+            opcao = input("Opção: ")
+
+            match opcao:
+                case "1": self.cadastrar()
+                case "2": self.consultar()
+                case "3": self.editar()
+                case "4": self.excluir()
+                case "5":
+                    print("Saindo...")
+                    break
+                case _: print("Opção inválida.")
+
+    def cadastrar(self):
+        try:
+            print("[CADASTRAR CONTATO]")
+            nome = input("Nome: ")
+            telefone = input("Telefone: ")
+            email = input("E-mail: ")
+            if self.buscar_por_telefone(telefone):
+                print("Erro: telefone já cadastrado.")
+                return
+            contato = Contato(nome, telefone, email)
+            self.__contatos.append(contato)
+            print("Contato cadastrado com sucesso!")
+        except ValueError as e:
+            print(f"Erro: {e}")
+
+    def consultar(self):
+        if not self.__contatos:
+            print("Agenda vazia.")
+            return
+        print("[CONSULTAR AGENDA]")
+        print("Ordenar por: 1-Nome 2-Telefone 3-E-mail")
+        opcao = input("Opção: ")
+        chave = {
+            "1": lambda c: c.get_nome().lower(),
+            "2": lambda c: c.get_telefone(),
+            "3": lambda c: c.get_email().lower()
+        }.get(opcao, lambda c: c.get_nome().lower())
+        contatos_ordenados = sorted(self.__contatos, key=chave)
+        for i, contato in enumerate(contatos_ordenados, 1):
+            print(f"# {i} | {contato}")
+
+    def editar(self):
+        telefone = input("Informe o telefone do contato a editar: ")
+        contato = self.buscar_por_telefone(telefone)
+        if not contato:
+            print("Contato não encontrado.")
+            return
+        print(f"Editando contato: {contato}")
+        novo_nome = input("Novo nome (enter p/ manter): ")
+        novo_telefone = input("Novo telefone (enter p/ manter): ")
+        novo_email = input("Novo e-mail (enter p/ manter): ")
+
+        try:
+            if novo_nome: contato.set_nome(novo_nome)
+            if novo_telefone:
+                if self.buscar_por_telefone(novo_telefone) and novo_telefone != telefone:
+                    print("Erro: telefone já em uso.")
+                    return
+                contato.set_telefone(novo_telefone)
+            if novo_email: contato.set_email(novo_email)
+            print("Contato atualizado com sucesso!")
+        except ValueError as e:
+            print(f"Erro: {e}")
+
+    def excluir(self):
+        telefone = input("Informe o telefone do contato: ")
+        contato = self.buscar_por_telefone(telefone)
+        if not contato:
+            print("Contato não encontrado.")
+            return
+        confirmar = input("Confirmar exclusão? (S/N): ").strip().upper()
+        if confirmar == "S":
+            self.__contatos.remove(contato)
+            print("Contato excluído!")
+        else:
+            print("Exclusão cancelada.")
+
+    def buscar_por_telefone(self, telefone):
+        for c in self.__contatos:
+            if c.get_telefone() == telefone:
+                return c
+        return None
